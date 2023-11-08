@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  nginx-server:
+    build: ./requirements/nginx
+    image: nginx-server
+    container_name: nginx-server
+    ports:
+      - 443:443
+  mariadb-data:
+    build:  ./requirements/mariadb
+    image: mariadb-data
+    container_name: mariadb-data
+    env_file:
+      - .env
