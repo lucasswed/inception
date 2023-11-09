@@ -17,9 +17,6 @@ _EOF_
 
 sleep 3;
 
-mysql -u root -e "DELETE FROM mysql.user WHERE User='';"
-mysql -u root -e 
-
 echo "Creating admin user"
 mysql -u root -e "CREATE DATABASE $DB_NAME;"
 mysql -u root -e "CREATE USER '$DB_ADMIN'@'%' IDENTIFIED BY '$DB_PASS';"
