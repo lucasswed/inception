@@ -2,7 +2,7 @@
 
 if [ ! -d "/var/lib/mysql/$DB_NAME" ]; then
 
-/etc/init.d/mysql start;
+service mysql start;
 
 sleep 3;
 
@@ -16,15 +16,17 @@ mysql -u root -e "FLUSH PRIVILEGES;"
 echo "Setting password for root user"
 mysqladmin -u root password "$DB_PASS"
 
-/etc/init.d/mysql stop;
+service mysql stop;
 else
 
-/etc/init.d/mysql start;
+service mysql start;
 
 sleep 3;
 
-/etc/init.d/mysql stop;
+service mysql stop;
 fi
-#mariadb-data  | Usage: /etc/init.d/mysql start|stop|restart|reload|force-reload|status|bootstrap
+# Starting MariaDB database server: mysqld.
+# mariadb-data  | ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+# mariadb-data  | Stopping MariaDB database server: mysqld failed
 
 exec "$@"
