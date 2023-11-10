@@ -16,17 +16,11 @@ mysql -u root -e "FLUSH PRIVILEGES;"
 echo "Setting password for root user"
 mysqladmin -u root password "$DB_PASS"
 
-service mysql stop;
+mysqladmin -u root -p"$DB_PASS" shutdown
 else
-
 service mysql start;
 
-sleep 3;
-
-service mysql stop;
+mysqladmin -u root -p"$DB_PASS" shutdown
 fi
-# Starting MariaDB database server: mysqld.
-# mariadb-data  | ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
-# mariadb-data  | Stopping MariaDB database server: mysqld failed
 
 exec "$@"
