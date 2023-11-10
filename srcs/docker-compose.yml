@@ -13,7 +13,8 @@ services:
       - wp:/var/www/html
     networks:
       - inception
-    restart: always
+    restart: on-failure
+
   mariadb-data:
     build: ./requirements/mariadb
     image: mariadb-data
@@ -24,7 +25,8 @@ services:
       - db:/var/lib/mysql
     networks:
       - inception
-    restart: always
+    restart: on-failure
+  
   wordpress-site:
     build: ./requirements/wordpress
     image: wordpress-site
@@ -37,20 +39,21 @@ services:
       - wp:/var/www/html
     networks:
       - inception
-    restart: always
+    restart: on-failure
+
 
 volumes:
   db:
     name: db
     driver_opts:
       type: none
-      device: /home/lucas/data/mysql
+      device: /home/lucas-ma/data/mysql
       o: bind
   wp:
     name: wp
     driver_opts:
       type: none
-      device: /home/lucas/data/wordpress
+      device: /home/lucas-ma/data/wordpress
       o: bind
 
 networks:
