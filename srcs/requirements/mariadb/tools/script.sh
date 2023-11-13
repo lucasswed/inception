@@ -17,10 +17,6 @@ echo "Setting password for root user"
 mysqladmin -u root password "$DB_PASS"
 
 mysqladmin -u root -p"$DB_PASS" shutdown
-else
-service mysql start;
-
-mysqladmin -u root -p"$DB_PASS" shutdown
 fi
 
-exec "$@"
+exec mysqld_safe --bind-address=0.0.0.0

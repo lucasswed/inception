@@ -26,6 +26,12 @@ services:
     networks:
       - inception
     restart: on-failure
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "--silent"]
+      interval: 5s
+      timeout: 30s
+      retries: 10
+      start_period: 5s
   
   wordpress-site:
     build: ./requirements/wordpress
@@ -34,7 +40,8 @@ services:
     env_file:
       - .env
     depends_on:
-      - mariadb-data
+      mariadb-data:
+        condition: service_healthy
     volumes:
       - wp:/var/www/html
     networks:
